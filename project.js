@@ -1,10 +1,10 @@
-//  1. Despot some money
-//  2. Deteermine number  of lines to bet on 
-//  3. collet a bet amount 
-//  4. spin the slot machine  
-//  5. check id the user won  
-//  6. give the user their winnings 
-//  7. play again 
+// 1. Depositar algo de dinero
+// 2. Determinar el número de líneas a apostar
+// 3. cobrar una cantidad de apuesta
+// 4. girar la máquina tragamonedas
+// 5. verifique la identificación que ganó el usuario
+// 6. dar al usuario sus ganancias
+// 7. jugar de nuevo
 
 const prompt = require("prompt-sync")();
 
@@ -27,11 +27,11 @@ const SYMBOLS_VALUES = {
 
 const deposit = () => {
   while (true) {
-    const depositAmount = prompt("enter a deposit amount: ");  // Pedir al usuario que ingrease un monto de deposito
+    const depositAmount = prompt("Ingrese un monto de depósito: ");  // Pedir al usuario que ingrease un monto de deposito
     const numberDepositAmount = parseFloat(depositAmount); // cponvertir el string ingresado en numero con la funcion de paseFloat  "1254" -> 1254;
-    //validadion del monto
+    
     if (isNaN(numberDepositAmount) || numberDepositAmount <= 0) {
-      console.log("Invalid deposit amount, try again.")
+      console.log("Monto de depósito no válido, inténtalo de nuevo.")
     } else {
       return numberDepositAmount;
     }
@@ -42,9 +42,9 @@ const getNumberOfLines = () => {
   while (true) {
     const lines = prompt("Enter the number of lines to bet on (1-3) ");
     const numberOfLines = parseFloat(lines);
-    //validadion del monto
+
     if (isNaN(numberOfLines) || numberOfLines <= 0 || numberOfLines > 3) {
-      console.log("Invalid number of lines, try again.")
+      console.log("Introduce el número de líneas a apostar ")
     } else {
       return numberOfLines;
     }
@@ -53,11 +53,11 @@ const getNumberOfLines = () => {
 
 const getBet = (balance, lines) => {
   while (true) {
-    const bet = prompt("Enter the bet per line :  ");
+    const bet = prompt("Introduzca la apuesta por línea: ");
     const numberBet = parseFloat(bet);
-    //validadion del monto
+
     if (isNaN(numberBet) || numberBet <= 0 || numberBet > (balance / lines)) {
-      console.log("Invalid bet, try again.")
+      console.log("Apuesta no válida, inténtalo de nuevo.")
     } else {
       return numberBet;
     }
@@ -134,7 +134,7 @@ const game = () => {
   let balance = deposit();
 
   while (true) {
-    console.log("you have a balance of $ " + balance);
+    console.log("tienes un saldo de $" + balance);
     const numberOfLines = getNumberOfLines();
     const bet = getBet(balance, numberOfLines);
     balance -= bet * numberOfLines;
@@ -143,13 +143,13 @@ const game = () => {
     printRows(rows);
     const winnings = getWinnings(rows, bet, numberOfLines);
     balance += winnings;
-    console.log(" you won, $" + winnings.toString());
+    console.log("ganaste, $" + winnings.toString());
 
     if (balance <= 0) {
-      console.log("You ran out of money ");
+      console.log("Te quedaste sin dinero ");
       break;
     }
-    const playAgain = prompt("do you want to play again (y/n)? ");
+    const playAgain = prompt("Quieres jugar de nuevo (y/n)? ");
     if (playAgain != "y") break;
 
   }
